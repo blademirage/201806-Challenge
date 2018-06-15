@@ -1,0 +1,4 @@
+repository,min_version
+prometheus/prometheus,2.2.0
+coreos/torcx,0.1.0
+kubernetes/kubernetes,1.8.0
