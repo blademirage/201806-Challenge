@@ -1,4 +1,5 @@
 repository,min_version
+nodejs/node,8.0.0
 prometheus/prometheus,2.2.0
 coreos/torcx,0.1.0
 kubernetes/kubernetes,1.8.0

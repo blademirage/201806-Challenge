@@ -59,6 +59,10 @@ func LatestVersions(releases []*semver.Version, minVersion *semver.Version) []*s
 			idxMajor = version.Major
 			idxMinor = version.Minor
 			versionSlice = append(versionSlice, version)
+		}else if curMajor < idxMajor && version.Compare(*minVersion) >= 0 {
+			idxMajor = version.Major
+			idxMinor = version.Minor
+			versionSlice = append(versionSlice, version)
 		}
 	}
 	return versionSlice
@@ -77,6 +81,7 @@ func GetReleases(client *github.Client, ctx context.Context, opt *github.ListOpt
 		if versionString[0] == 'v' {
 			versionString = versionString[1:]
 		}
+		//fmt.Printf("%s %s\n", repo, versionString)
 		ver, verErr := semver.NewVersion(versionString)
 		// Add versions that can be parsed into the list
 		if verErr == nil {
@@ -111,7 +116,6 @@ func ProcessInputFile(path string) []Source {
 		} else {
 			firstLine = false
 		}
-
 	}
 	if err := scanner.Err(); err != nil {
 		// Use panic here to ensure all deferred function can be executed
